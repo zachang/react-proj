@@ -8,12 +8,27 @@ let Greeter = React.createClass({
 
   onButtonClick: function(e){
     e.preventDefault();
-    let name = this.refs.name.value;
-    alert(name);
+
+    let nameRef = this.refs.name;
+    let name = nameRef.value;
+    nameRef.value = '';
+
+    if(typeof name === 'string' && name.length > 0) {
+      this.setState({
+        name:name
+      });
+    }
+
+  },
+
+  getInitialState: function(){
+    return{
+      name: this.props.name
+    };
   },
 
   render: function() {
-    let name = this.props.name;
+    let name = this.state.name;
     let message = this.props.message;
     return(
      <div>
